@@ -9,6 +9,13 @@ package ch.hearc.ig.odi.peoplemovie.exception;
  *
  * @author johan.steiner
  */
-public class InvalidParameterException {
-    
+public class InvalidParameterException extends Exception {
+
+    public InvalidParameterException() {
+    }
+
+    public InvalidParameterException(String message) {
+        super(message);
+    }
+
 }

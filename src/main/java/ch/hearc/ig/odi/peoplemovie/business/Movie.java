@@ -5,6 +5,8 @@
  */
 package ch.hearc.ig.odi.peoplemovie.business;
 
+import java.util.List;
+
 /**
  *
  * @author johan.steiner
@@ -14,6 +16,10 @@ public class Movie {
     private Long id;
     private String name;
     private String producer;
+    private List<Person> people;    
+
+    public Movie() {
+    }
 
     public Movie(Long id, String name, String producer) {
         this.id = id;
@@ -43,6 +49,14 @@ public class Movie {
 
     public void setProducer(String producer) {
         this.producer = producer;
+    }
+
+    public List<Person> getPeople() {
+        return people;
+    }
+
+    public void setPeople(List<Person> people) {
+        this.people = people;
     }
     
     

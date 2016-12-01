@@ -9,6 +9,13 @@ package ch.hearc.ig.odi.peoplemovie.exception;
  *
  * @author johan.steiner
  */
-public class UniqueException {
+public class UniqueException extends Exception {
+
+    public UniqueException() {
+    }
+
+    public UniqueException(String message) {
+        super(message);
+    }
     
 }
