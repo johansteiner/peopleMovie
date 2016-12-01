@@ -1,0 +1,4 @@
+/peopleMovie/target/*
+!/peopleMovie/target/site/
+/peopleMovie/target/site/*
+!/peopleMovie/target/site/apidocs/
