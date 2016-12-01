@@ -5,6 +5,8 @@
  */
 package ch.hearc.ig.odi.peoplemovie.business;
 
+import ch.hearc.ig.odi.peoplemovie.exception.NullParameterException;
+import ch.hearc.ig.odi.peoplemovie.exception.UniqueException;
 import java.util.List;
 
 /**
@@ -59,7 +61,16 @@ public class Person {
         this.movies = movies;
     }
     
-    public void addMovie(Movie movie) {
+    public void addMovie(Movie movie) throws UniqueException, NullParameterException {
+        if(movie == null) {
+                throw new NullParameterException("Le paramètre est nul");
+            }
+            else{
+                if(movies.get(movie.getId().intValue()) != null) {
+                    throw new UniqueException("Le film existe déjà dans la liste");
+                }
+            }
+        
         movies.add(movie);
     }
     
