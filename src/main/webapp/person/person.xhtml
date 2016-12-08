@@ -13,7 +13,7 @@
     </h:head>
     <h:body>
         
-        <ui:composition template="main.xhtml">
+        <ui:composition template="/main.xhtml">
             
             <ui:define name="top">
                 #{msg['person.movielist.title']}
@@ -37,13 +37,13 @@
                 <h:dataTable value="#{managePerson.currentPerson.movies}" var="moviePers">
                     <h:column>
                         <f:facet name="header">#{msg['index.movieslist.id']}</f:facet>
-                        <h:link outcome="movie.xhtml" value="#{moviePers.id}">
+                        <h:link outcome="/movie/movie.xhtml" value="#{moviePers.id}">
                             <f:param name="id" value="#{moviePers.id}" />
                         </h:link>
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['index.movieslist.name']}</f:facet>
-                        <h:link outcome="movie.xhtml" value="#{moviePers.name}">
+                        <h:link outcome="/movie/movie.xhtml" value="#{moviePers.name}">
                             <f:param name="id" value="#{moviePers.id}" />
                         </h:link>
                     </h:column> 
@@ -57,7 +57,7 @@
                 </h:dataTable>
                 <br/>
                 
-                <h:button value="#{msg['button.return.index']}" outcome="index.xhtml"/>
+                <h:button value="#{msg['button.return.index']}" outcome="/index.xhtml"/>
                 
             </ui:define>
             

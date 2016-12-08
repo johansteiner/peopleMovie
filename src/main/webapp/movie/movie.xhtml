@@ -12,7 +12,7 @@
         </f:metadata>
     </h:head>
     <h:body>
-        <ui:composition template="main.xhtml">
+        <ui:composition template="/main.xhtml">
             <ui:define name="top">
                 #{msg['movie.title']}
             </ui:define>
@@ -35,26 +35,26 @@
                 <h:dataTable value="#{manageMovie.currentMovie.people}" var="persMovie">
                     <h:column>
                         <f:facet name="header">#{msg['index.peoplelist.id']}</f:facet>
-                        <h:link outcome="person.xhtml" value="#{persMovie.id}">
+                        <h:link outcome="/person/person.xhtml" value="#{persMovie.id}">
                             <f:param name="id" value="#{persMovie.id}" />
                         </h:link>                      
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['index.peoplelist.firstname']}</f:facet>
-                        <h:link outcome="person.xhtml" value="#{persMovie.firstname}">
+                        <h:link outcome="/person/person.xhtml" value="#{persMovie.firstname}">
                             <f:param name="id" value="#{persMovie.id}" />
                         </h:link>                      
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['index.peoplelist.lastname']}</f:facet>
-                        <h:link outcome="person.xhtml" value="#{persMovie.lastname}">
+                        <h:link outcome="/person/person.xhtml" value="#{persMovie.lastname}">
                             <f:param name="id" value="#{persMovie.id}" />
                         </h:link>                      
                     </h:column>
                 </h:dataTable>
                 <br/>
                 
-                <h:button value="#{msg['button.return.index']}" outcome="index.xhtml"/>
+                <h:button value="#{msg['button.return.index']}" outcome="/index.xhtml"/>
                 
             </ui:define>
         </ui:composition>
