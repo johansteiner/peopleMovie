@@ -5,6 +5,11 @@
  */
 package ch.hearc.ig.odi.peoplemovie.business;
 
+import ch.hearc.ig.odi.peoplemovie.exception.NullParameterException;
+import ch.hearc.ig.odi.peoplemovie.exception.UniqueException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author johan.steiner
@@ -14,11 +19,17 @@ public class Person {
     private Long id;
     private String firstname;
     private String lastname;
+    private List<Movie> movies;
+
+    public Person() {
+        this.movies = new ArrayList<Movie>();
+    }
 
     public Person(Long id, String firstname, String lastname) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.movies = new ArrayList<Movie>();
     }
 
     public Long getId() {
@@ -44,7 +55,41 @@ public class Person {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
     
+    public void addMovie(Movie movie) throws UniqueException, NullParameterException {
+        
+        // Si le film est nul ==> exception
+        if(movie == null) {
+            throw new NullParameterException("Le paramètre est nul");
+        }
+        else{
+            // Si la liste contient au moins un film...
+            if(movies.size() > 0){
+                // ... pour chaque film de la liste...
+                for(Movie mov : movies) { 
+                    // ... on contrôle s'il y a un film
+                    // avec le même ID que le film à ajouter
+                    if(movie.getId() == mov.getId()) {
+                        throw new UniqueException("Le film existe déjà dans la liste"); 
+                    }
+                }
+            }
+            movies.add(movie);
+            movie.addPerson(this);
+        } 
+               
+    }
     
+    public void removeMovie(Movie movie) {
+        movies.remove(movie);
+    }
     
 }
