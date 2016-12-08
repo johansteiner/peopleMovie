@@ -47,4 +47,9 @@ public class ManageMovie {
         currentMovie = service.getMovieWithId(idMovie);
     }
     
+    public String addNewMovie() {
+        
+        return "/index.xhtml";
+    }
+    
 }

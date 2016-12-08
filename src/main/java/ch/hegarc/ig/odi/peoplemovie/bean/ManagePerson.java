@@ -22,6 +22,8 @@ public class ManagePerson {
     @Inject Services service;
 
     private Long idPerson;
+    private String firstname;
+    private String lastname;
     private Person currentPerson;
     
     public ManagePerson() {
@@ -35,6 +37,22 @@ public class ManagePerson {
         this.idPerson = idPerson;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
     public Person getCurrentPerson() {
         return currentPerson;
     }
@@ -45,6 +63,11 @@ public class ManagePerson {
     
     public void initPerson() {
         currentPerson = service.getPersonWithId(idPerson);
+    }
+    
+    public String addNewPerson() {
+        
+        return "/index.xhtml";
     }
     
 }

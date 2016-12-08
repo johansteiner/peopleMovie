@@ -7,7 +7,7 @@
         <title>Ajout d'une personne</title>
     </h:head>
     <h:body>
-        <ui:composition template="main.xhtml">
+        <ui:composition template="/main.xhtml">
             
             <ui:define name="top">
                #{msg['addPerson.title']} 
@@ -17,14 +17,15 @@
               
                 <h:form>
                     
-                    <!--
-                    {msg['person.firstname']} <h:inputText value="" required="Yes" /><br>
-                    {msg['person.lastname']} <h:inputText value="" required="Yes" /><br>
-                
+                    
+                    #{msg['person.firstname']} <h:inputText value="#{managePerson.firstname}" required="Yes" /><br/><br/>
+                    #{msg['person.lastname']} <h:inputText value="#{managePerson.lastname}" required="Yes" /><br/><br/>
+                <!--
                     <h:commandButton value="{msg['button.reinit']}" action="" />
-                    <h:commandButton value="{msg['button.validate']}" action="" />
-                    -->
-                    <h:button value="#{msg['button.cancel']}"
+                -->
+                <h:commandButton value="#{msg['button.validate']}" action="#{managePerson.addNewPerson()}" />
+                  
+                    <h:button value="#{msg['button.cancel']}" outcome="/index.xhtml"/>
                 </h:form> 
                 
             </ui:define>
