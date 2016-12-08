@@ -51,5 +51,5 @@ public class ShowPeopleMoviesBean {
         this.people = service.getPeopleList();
         this.movies = service.getMoviesList();
     }
-    
+        
 }
