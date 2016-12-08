@@ -20,8 +20,8 @@
             </ui:define>
             
             <ui:define name="content">
-                <h2>#{msg['index.peoplelist.title']}</h2>
-
+                <h1>#{msg['index.peoplelist.title']}</h1>
+                <br/>
                 <h:dataTable value="#{showPeopleMoviesBean.people}" var="person">
                     <h:column>
                         <f:facet name="header">#{msg['index.peoplelist.id']}</f:facet>
@@ -49,17 +49,18 @@
 
                 <br/><br/>
 
-                <h2>#{msg['index.movieslist.title']}</h2>
+                <h1>#{msg['index.movieslist.title']}</h1>
+                <br/>
                 <h:dataTable value="#{showPeopleMoviesBean.movies}" var="movie">
                     <h:column>
                         <f:facet name="header">#{msg['index.movieslist.id']}</f:facet>
-                        <h:link outcome="person.xhtml" value="#{movie.id}">
+                        <h:link outcome="movie.xhtml" value="#{movie.id}">
                             <f:param name="id" value="#{movie.id}" />
                         </h:link>
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['index.movieslist.name']}</f:facet>
-                        <h:link outcome="person.xhtml" value="#{movie.name}">
+                        <h:link outcome="movie.xhtml" value="#{movie.name}">
                             <f:param name="id" value="#{movie.id}" />
                         </h:link> 
                     </h:column>
