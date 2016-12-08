@@ -66,19 +66,25 @@ public class Person {
     
     public void addMovie(Movie movie) throws UniqueException, NullParameterException {
         
-        this.movies.add(movie);
-        /*
+        // Si le film est nul ==> exception
         if(movie == null) {
             throw new NullParameterException("Le paramètre est nul");
         }
         else{
+            // Si la liste contient au moins un film...
             if(movies.size() > 0){
-                if(movies.get(movie.getId().intValue()) != null) {
-                    throw new UniqueException("Le film existe déjà dans la liste"); 
+                // ... pour chaque film de la liste...
+                for(Movie mov : movies) { 
+                    // ... on contrôle s'il y a un film
+                    // avec le même ID que le film à ajouter
+                    if(movie.getId() == mov.getId()) {
+                        throw new UniqueException("Le film existe déjà dans la liste"); 
+                    }
                 }
             }
-            movies.add(movie);    
-        } */ 
+            movies.add(movie);
+            movie.addPerson(this);
+        } 
                
     }
     

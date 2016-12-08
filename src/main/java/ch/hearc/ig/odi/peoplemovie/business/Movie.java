@@ -5,6 +5,9 @@
  */
 package ch.hearc.ig.odi.peoplemovie.business;
 
+import ch.hearc.ig.odi.peoplemovie.exception.NullParameterException;
+import ch.hearc.ig.odi.peoplemovie.exception.UniqueException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,12 +22,14 @@ public class Movie {
     private List<Person> people;    
 
     public Movie() {
+        this.people = new ArrayList<Person>();
     }
 
     public Movie(Long id, String name, String producer) {
         this.id = id;
         this.name = name;
         this.producer = producer;
+        this.people = new ArrayList<Person>();
     }
 
     public Long getId() {
@@ -59,6 +64,27 @@ public class Movie {
         this.people = people;
     }
     
-    
+    public void addPerson(Person person) throws UniqueException, NullParameterException {
+        
+        // Si le film est nul ==> exception
+        if(person == null) {
+            throw new NullParameterException("Le paramètre est nul");
+        }
+        else{
+            // Si la liste contient au moins une personne...
+            if(people.size() > 0){
+                // ... pour chaque personne de la liste...
+                for(Person pers : people) { 
+                    // ... on contrôle s'il y a une personne
+                    // avec le même ID que la personne à ajouter
+                    if(person.getId() == pers.getId()) {
+                        throw new UniqueException("La personne existe déjà dans la liste"); 
+                    }
+                }
+            }
+            people.add(person);  
+        } 
+               
+    }
     
 }

@@ -31,11 +31,15 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['index.peoplelist.lastname']}</f:facet>
-                        #{person.lastname}
+                        <h:link outcome="person.xhtml" value="#{person.lastname}">
+                            <f:param name="id" value="#{person.id}" />
+                        </h:link>                        
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['index.peoplelist.firstname']}</f:facet>
-                        #{person.firstname}
+                        <h:link outcome="person.xhtml" value="#{person.firstname}">
+                            <f:param name="id" value="#{person.id}" />
+                        </h:link>
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['index.peoplelist.nbmovies']}</f:facet>
