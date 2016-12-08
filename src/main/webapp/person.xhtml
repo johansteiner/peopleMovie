@@ -1,12 +1,63 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <f:metadata>
+            <f:viewParam name="id" value="#{managePerson.idPerson}"/>
+            <f:viewAction action="#{managePerson.initPerson()}"/>
+        </f:metadata>
     </h:head>
     <h:body>
-        Hello from Facelets
+        
+        <ui:composition template="main.xhtml">
+            
+            <ui:define name="top">
+                #{msg['person.movielist.title']}
+            </ui:define>
+            
+            <ui:define name="content">
+                #{msg['person.id']} #{managePerson.currentPerson.id}
+                <br/>
+                #{msg['person.firstname']} #{managePerson.currentPerson.firstname}
+                <br/>
+                #{msg['person.lastname']} #{managePerson.currentPerson.lastname}
+                
+                <br/><br/>
+                
+                <h1>#{msg['person.movielist.title']}</h1>
+                <br/>
+                <h:dataTable value="#{managePerson.currentPerson.movies}" var="moviePers">
+                    <h:column>
+                        <f:facet name="header">#{msg['index.movieslist.id']}</f:facet>
+                        <h:link outcome="movie.xhtml" value="#{moviePers.id}">
+                            <f:param name="id" value="" />
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{msg['index.movieslist.name']}</f:facet>
+                        <h:link outcome="movie.xhtml" value="#{moviePers.name}">
+                            <f:param name="id" value="" />
+                        </h:link>
+                    </h:column> 
+                    <h:column>
+                        <f:facet name="header">#{msg['index.movieslist.producer']}</f:facet>
+                        #{moviePers.producer}
+                    </h:column> 
+                    <h:column>
+                        
+                    </h:column> 
+                </h:dataTable>
+                    
+                
+                
+            </ui:define>
+            
+        </ui:composition>
+        
     </h:body>
 </html>
 
