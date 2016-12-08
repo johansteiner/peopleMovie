@@ -21,8 +21,8 @@ public class ManagePerson {
     
     @Inject Services service;
 
-    Long idPerson;
-    Person currentPerson;
+    private Long idPerson;
+    private Person currentPerson;
     
     public ManagePerson() {
     }

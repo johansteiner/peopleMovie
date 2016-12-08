@@ -14,7 +14,7 @@
         </f:metadata>
         
         
-        <ui:composition template="main.xhtml">
+        <ui:composition template="/main.xhtml">
             <ui:define name="top">
                 #{msg['index.title']}
             </ui:define>
@@ -25,19 +25,19 @@
                 <h:dataTable value="#{showPeopleMoviesBean.people}" var="person">
                     <h:column>
                         <f:facet name="header">#{msg['index.peoplelist.id']}</f:facet>
-                        <h:link outcome="person.xhtml" value="#{person.id}">
+                        <h:link outcome="/person/person.xhtml" value="#{person.id}">
                             <f:param name="id" value="#{person.id}" />
                         </h:link>
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['index.peoplelist.lastname']}</f:facet>
-                        <h:link outcome="person.xhtml" value="#{person.lastname}">
+                        <h:link outcome="/person/person.xhtml" value="#{person.lastname}">
                             <f:param name="id" value="#{person.id}" />
                         </h:link>                        
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['index.peoplelist.firstname']}</f:facet>
-                        <h:link outcome="person.xhtml" value="#{person.firstname}">
+                        <h:link outcome="/person/person.xhtml" value="#{person.firstname}">
                             <f:param name="id" value="#{person.id}" />
                         </h:link>
                     </h:column>
@@ -54,13 +54,13 @@
                 <h:dataTable value="#{showPeopleMoviesBean.movies}" var="movie">
                     <h:column>
                         <f:facet name="header">#{msg['index.movieslist.id']}</f:facet>
-                        <h:link outcome="movie.xhtml" value="#{movie.id}">
+                        <h:link outcome="/movie/movie.xhtml" value="#{movie.id}">
                             <f:param name="id" value="#{movie.id}" />
                         </h:link>
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['index.movieslist.name']}</f:facet>
-                        <h:link outcome="movie.xhtml" value="#{movie.name}">
+                        <h:link outcome="/movie/movie.xhtml" value="#{movie.name}">
                             <f:param name="id" value="#{movie.id}" />
                         </h:link> 
                     </h:column>
