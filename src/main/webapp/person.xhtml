@@ -5,7 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Personne</title>
         <f:metadata>
             <f:viewParam name="id" value="#{managePerson.idPerson}"/>
             <f:viewAction action="#{managePerson.initPerson()}"/>
@@ -20,6 +20,10 @@
             </ui:define>
             
             <ui:define name="content">
+                
+                <h1>#{msg['person.title']}</h1>
+                <br/>
+                
                 #{msg['person.id']} #{managePerson.currentPerson.id}
                 <br/>
                 #{msg['person.firstname']} #{managePerson.currentPerson.firstname}
@@ -34,13 +38,13 @@
                     <h:column>
                         <f:facet name="header">#{msg['index.movieslist.id']}</f:facet>
                         <h:link outcome="movie.xhtml" value="#{moviePers.id}">
-                            <f:param name="id" value="" />
+                            <f:param name="id" value="#{moviePers.id}" />
                         </h:link>
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['index.movieslist.name']}</f:facet>
                         <h:link outcome="movie.xhtml" value="#{moviePers.name}">
-                            <f:param name="id" value="" />
+                            <f:param name="id" value="#{moviePers.id}" />
                         </h:link>
                     </h:column> 
                     <h:column>
