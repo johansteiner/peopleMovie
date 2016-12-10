@@ -28,6 +28,9 @@ public class ManageMovie {
     private Movie currentMovie;
     
     public ManageMovie() {
+        if(currentMovie == null) {
+            currentMovie = new Movie();
+        }
     }
 
     public Long getIdMovie() {
@@ -67,7 +70,11 @@ public class ManageMovie {
      * reprenant un film existant par son ID
      */
     public void initMovie() {
-        currentMovie = service.getMovieWithId(idMovie);
+        if(idMovie == null) {
+            currentMovie = new Movie();
+        } else {
+            currentMovie = service.getMovieWithId(idMovie);
+        }
     }
     
     /**
@@ -77,8 +84,12 @@ public class ManageMovie {
      * @throws NullParameterException 
      */
     public String addNewMovie() throws NullParameterException {
-        Movie newMovie = new Movie(name, producer);
-        service.saveMovie(newMovie);
+        service.saveMovie(currentMovie);
+        return "/index.xhtml?faces-redirect=true";
+    }
+    
+    public String editMovie() {
+        
         return "/index.xhtml?faces-redirect=true";
     }
     

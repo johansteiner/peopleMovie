@@ -28,6 +28,9 @@ public class ManagePerson {
     private Person currentPerson;
     
     public ManagePerson() {
+        if(currentPerson==null) {
+            currentPerson = new Person();
+        }
     }
 
     public Long getIdPerson() {
@@ -63,11 +66,15 @@ public class ManagePerson {
     }
     
     /**
-     * crée un nouvel objet de type Person en
-     * reprenant une personne existante par son ID
+     * crée un nouvel objet de type Person en reprenant
+     * une personne existante par son ID s'il y en a
      */
     public void initPerson() {
-        currentPerson = service.getPersonWithId(idPerson);
+        if(idPerson == null) {
+            currentPerson = new Person();
+        } else {
+            currentPerson = service.getPersonWithId(idPerson);
+        }
     }
     
     /**
@@ -77,8 +84,17 @@ public class ManagePerson {
      * @throws NullParameterException 
      */
     public String addNewPerson() throws NullParameterException {
-        Person newPerson = new Person(firstname, lastname);
-        service.savePerson(newPerson);
+        service.savePerson(currentPerson);
+        return "/index.xhtml?faces-redirect=true";
+    }
+    
+    public String editPerson() {
+        /*Person personEdited = service.getPersonWithId(idPerson);
+        personEdited.setFirstname(firstname);
+        personEdited.setLastname(lastname);*/
+        
+        service.getPersonWithId(currentPerson.getId()).setFirstname(currentPerson.getFirstname());    
+        service.getPersonWithId(currentPerson.getId()).setLastname(currentPerson.getLastname());
         return "/index.xhtml?faces-redirect=true";
     }
     

@@ -31,6 +31,10 @@
                 #{msg['person.lastname']} #{managePerson.currentPerson.lastname}
                 
                 <br/><br/>
+                <h:button value="#{msg['button.edit']}" outcome="/person/addPerson.xhtml">
+                    <f:param name="id" value="#{managePerson.idPerson}" />
+                </h:button>
+                <br/><br/>
                 
                 <h1>#{msg['person.movielist.title']}</h1>
                 <br/>

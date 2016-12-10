@@ -12,7 +12,9 @@
         </f:metadata>
     </h:head>
     <h:body>
+        
         <ui:composition template="/main.xhtml">
+            
             <ui:define name="top">
                 #{msg['movie.title']}
             </ui:define>
@@ -27,6 +29,10 @@
                 #{msg['movie.name']} #{manageMovie.currentMovie.name}
                 <br/>
                 #{msg['movie.producer']} #{manageMovie.currentMovie.producer}
+                <br/><br/>
+                <h:button value="#{msg['button.edit']}" outcome="/movie/addMovie.xhtml">
+                    <f:param name="id" value="#{manageMovie.idMovie}" />
+                </h:button>
                 <br/><br/>
                 
                 <h1>#{msg['movie.peoplelist.title']}</h1>

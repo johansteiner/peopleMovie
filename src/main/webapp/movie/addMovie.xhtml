@@ -2,27 +2,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Ajout d'un film</title>
+        <f:metadata>
+            <f:viewParam name="id" value="#{manageMovie.idMovie}"/>
+            <f:viewAction action="#{manageMovie.initMovie()}"/>
+        </f:metadata>
     </h:head>
     <h:body>
         <ui:composition template="/main.xhtml">
             
             <ui:define name="top">
-               #{msg['addMovie.title']} 
+                <h:panelGroup rendered="#{managePerson.idPerson == null}">
+                    #{msg['addMovie.title.add']}
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{managePerson.idPerson != null}">
+                    #{msg['addMovie.title.edit']}
+               </h:panelGroup>         
             </ui:define>
             
             <ui:define name="content">
               
                 <h:form>
-                     
-                    #{msg['movie.name']} <h:inputText value="#{manageMovie.name}" required="Yes" /><br/><br/>
-                    #{msg['movie.producer']} <h:inputText value="#{manageMovie.producer}" required="Yes" /><br/><br/>
+                    <h:panelGroup rendered="#{manageMovie.idMovie != null}">
+                        #{msg['movie.id']} <h:inputText value="#{manageMovie.currentMovie.id}" disabled="true" /><br/><br/>
+                    </h:panelGroup>
+                    
+                    #{msg['movie.name']} <h:inputText value="#{manageMovie.currentMovie.name}" required="Yes" /><br/><br/>
+                    #{msg['movie.producer']} <h:inputText value="#{manageMovie.currentMovie.producer}" required="Yes" /><br/><br/>
                 <!--
                     <h:commandButton value="{msg['button.reinit']}" action="" />
                 -->
-                <h:commandButton value="#{msg['button.validate']}" action="#{manageMovie.addNewMovie()}" />
+                <h:panelGroup rendered="#{manageMovie.idMovie == null}">
+                    <h:commandButton value="#{msg['button.validate']}" action="#{manageMovie.addNewMovie()}" />
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{manageMovie.idMovie != null}">
+                    <h:commandButton value="#{msg['button.validate']}" action="#{manageMovie.editMovie()}" />
+                </h:panelGroup>
                   
                     <h:button value="#{msg['button.cancel']}" outcome="/index.xhtml"/>
                 </h:form> 

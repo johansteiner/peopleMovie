@@ -2,28 +2,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Ajout d'une personne</title>
+        <f:metadata>
+            <f:viewParam name="id" value="#{managePerson.idPerson}"/>
+            <f:viewAction action="#{managePerson.initPerson()}"/>
+        </f:metadata>
     </h:head>
     <h:body>
         <ui:composition template="/main.xhtml">
             
             <ui:define name="top">
-               #{msg['addPerson.title']} 
+                <h:panelGroup rendered="#{managePerson.idPerson == null}">
+                    #{msg['addPerson.title.add']} 
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{managePerson.idPerson != null}">
+                    #{msg['addPerson.title.edit']}
+               </h:panelGroup>
             </ui:define>
             
             <ui:define name="content">
               
                 <h:form>
+                    <h:panelGroup rendered="#{managePerson.idPerson != null}">
+                        #{msg['person.id']} <h:inputText value="#{managePerson.currentPerson.id}" disabled="true" /><br/><br/>
+                    </h:panelGroup>
                     
-                    
-                    #{msg['person.firstname']} <h:inputText value="#{managePerson.firstname}" required="Yes" /><br/><br/>
-                    #{msg['person.lastname']} <h:inputText value="#{managePerson.lastname}" required="Yes" /><br/><br/>
+                    #{msg['person.firstname']} <h:inputText value="#{managePerson.currentPerson.firstname}" required="Yes" /><br/><br/>
+                    #{msg['person.lastname']} <h:inputText value="#{managePerson.currentPerson.lastname}" required="Yes" /><br/><br/>
                 <!--
                     <h:commandButton value="{msg['button.reinit']}" action="" />
                 -->
-                <h:commandButton value="#{msg['button.validate']}" action="#{managePerson.addNewPerson()}" />
+                <h:panelGroup rendered="#{managePerson.idPerson == null}">
+                    <h:commandButton value="#{msg['button.validate']}" action="#{managePerson.addNewPerson()}" />
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{managePerson.idPerson != null}">
+                    <h:commandButton value="#{msg['button.validate']}" action="#{managePerson.editPerson()}" />
+                </h:panelGroup>
                   
                     <h:button value="#{msg['button.cancel']}" outcome="/index.xhtml"/>
                 </h:form> 
