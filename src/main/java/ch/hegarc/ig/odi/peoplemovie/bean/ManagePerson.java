@@ -6,6 +6,7 @@
 package ch.hegarc.ig.odi.peoplemovie.bean;
 
 import ch.hearc.ig.odi.peoplemovie.business.Person;
+import ch.hearc.ig.odi.peoplemovie.exception.NullParameterException;
 import ch.hearc.ig.odi.peoplemovie.service.Services;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -61,13 +62,24 @@ public class ManagePerson {
         this.currentPerson = currentPerson;
     }
     
+    /**
+     * crée un nouvel objet de type Person en
+     * reprenant une personne existante par son ID
+     */
     public void initPerson() {
         currentPerson = service.getPersonWithId(idPerson);
     }
     
-    public String addNewPerson() {
-        
-        return "/index.xhtml";
+    /**
+     * ajoute une nouvelle personne en fonction des
+     * informations (nom, producteur) entrées par l'utilisateur
+     * @return chaine de caractère pour redirection sur la page index.xhtml
+     * @throws NullParameterException 
+     */
+    public String addNewPerson() throws NullParameterException {
+        Person newPerson = new Person(firstname, lastname);
+        service.savePerson(newPerson);
+        return "/index.xhtml?faces-redirect=true";
     }
     
 }
