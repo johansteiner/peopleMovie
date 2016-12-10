@@ -5,20 +5,23 @@
  */
 package ch.hegarc.ig.odi.peoplemovie.bean;
 
+import ch.hearc.ig.odi.peoplemovie.business.Movie;
 import ch.hearc.ig.odi.peoplemovie.business.Person;
+import ch.hearc.ig.odi.peoplemovie.exception.InvalidParameterException;
 import ch.hearc.ig.odi.peoplemovie.exception.NullParameterException;
 import ch.hearc.ig.odi.peoplemovie.service.Services;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 /**
  *
  * @author johan.steiner
  */
-@Named(value = "managePerson")
-@RequestScoped
-public class ManagePerson {
+@ManagedBean(name = "managePerson")
+@ViewScoped
+public class ManagePerson implements Serializable{
     
     @Inject Services service;
 
@@ -78,7 +81,7 @@ public class ManagePerson {
     }
     
     /**
-     * ajoute une nouvelle personne en fonction des informations
+     * ajout d'une nouvelle personne en fonction des informations
      * (nom, prénom) entrées par l'utilisateur
      * @return chaine de caractère pour redirection sur la page index.xhtml
      * @throws NullParameterException 
@@ -98,6 +101,11 @@ public class ManagePerson {
         service.getPersonWithId(currentPerson.getId()).setFirstname(currentPerson.getFirstname());    
         service.getPersonWithId(currentPerson.getId()).setLastname(currentPerson.getLastname());
         return "/index.xhtml?faces-redirect=true";
+    }
+    
+    public void deleteMovie(Movie movie) throws NullParameterException, InvalidParameterException {
+        service.removeMovieFromPerson(currentPerson, movie);
+        //return "/person/person.xhtml?faces-redirect=true?id=" + currentPerson;
     }
     
 }

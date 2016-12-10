@@ -8,17 +8,19 @@ package ch.hegarc.ig.odi.peoplemovie.bean;
 import ch.hearc.ig.odi.peoplemovie.business.Movie;
 import ch.hearc.ig.odi.peoplemovie.exception.NullParameterException;
 import ch.hearc.ig.odi.peoplemovie.service.Services;
-import javax.inject.Named;
+import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 /**
  *
  * @author johan.steiner
  */
-@Named(value = "manageMovie")
-@RequestScoped
-public class ManageMovie {
+@ManagedBean(name = "manageMovie")
+@ViewScoped
+public class ManageMovie implements Serializable{
 
     @Inject Services service;
     
@@ -78,7 +80,7 @@ public class ManageMovie {
     }
     
     /**
-     * ajoute un nouveau film en fonction des
+     * ajout d'un nouveau film en fonction des
      * informations (nom, producteur) entrées par l'utilisateur
      * @return chaine de caractère pour redirection sur la page index.xhtml
      * @throws NullParameterException 

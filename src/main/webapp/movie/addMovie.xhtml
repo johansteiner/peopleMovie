@@ -33,9 +33,7 @@
                     
                     #{msg['movie.name']} <h:inputText value="#{manageMovie.currentMovie.name}" required="Yes" /><br/><br/>
                     #{msg['movie.producer']} <h:inputText value="#{manageMovie.currentMovie.producer}" required="Yes" /><br/><br/>
-                <!--
-                    <h:commandButton value="{msg['button.reinit']}" action="" />
-                -->
+                
                 <h:panelGroup rendered="#{manageMovie.idMovie == null}">
                     <h:commandButton value="#{msg['button.validate']}" action="#{manageMovie.addNewMovie()}" />
                 </h:panelGroup>
