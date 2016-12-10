@@ -31,9 +31,14 @@
                 #{msg['person.lastname']} #{managePerson.currentPerson.lastname}
                 
                 <br/><br/>
+                <h:button value="#{msg['button.edit']}" outcome="/person/addPerson.xhtml">
+                    <f:param name="id" value="#{managePerson.idPerson}" />
+                </h:button>
+                <br/><br/>
                 
                 <h1>#{msg['person.movielist.title']}</h1>
                 <br/>
+                <h:form>
                 <h:dataTable value="#{managePerson.currentPerson.movies}" var="moviePers">
                     <h:column>
                         <f:facet name="header">#{msg['index.movieslist.id']}</f:facet>
@@ -52,9 +57,10 @@
                         #{moviePers.producer}
                     </h:column> 
                     <h:column>
-                        
+                            <h:commandButton value="#{msg['button.delete']}" action="#{managePerson.deleteMovie(moviePers)}" />
                     </h:column> 
                 </h:dataTable>
+                </h:form>
                 <br/>
                 
                 <h:button value="#{msg['button.return.index']}" outcome="/index.xhtml"/>

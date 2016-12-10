@@ -5,20 +5,23 @@
  */
 package ch.hegarc.ig.odi.peoplemovie.bean;
 
+import ch.hearc.ig.odi.peoplemovie.business.Movie;
 import ch.hearc.ig.odi.peoplemovie.business.Person;
+import ch.hearc.ig.odi.peoplemovie.exception.InvalidParameterException;
 import ch.hearc.ig.odi.peoplemovie.exception.NullParameterException;
 import ch.hearc.ig.odi.peoplemovie.service.Services;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 /**
  *
  * @author johan.steiner
  */
-@Named(value = "managePerson")
-@RequestScoped
-public class ManagePerson {
+@ManagedBean(name = "managePerson")
+@ViewScoped
+public class ManagePerson implements Serializable{
     
     @Inject Services service;
 
@@ -28,6 +31,9 @@ public class ManagePerson {
     private Person currentPerson;
     
     public ManagePerson() {
+        if(currentPerson==null) {
+            currentPerson = new Person();
+        }
     }
 
     public Long getIdPerson() {
@@ -63,23 +69,43 @@ public class ManagePerson {
     }
     
     /**
-     * crée un nouvel objet de type Person en
-     * reprenant une personne existante par son ID
+     * crée un nouvel objet de type Person en reprenant
+     * une personne existante par son ID s'il y en a
      */
     public void initPerson() {
-        currentPerson = service.getPersonWithId(idPerson);
+        if(idPerson == null) {
+            currentPerson = new Person();
+        } else {
+            currentPerson = service.getPersonWithId(idPerson);
+        }
     }
     
     /**
-     * ajoute une nouvelle personne en fonction des
-     * informations (nom, producteur) entrées par l'utilisateur
+     * ajout d'une nouvelle personne en fonction des informations
+     * (nom, prénom) entrées par l'utilisateur
      * @return chaine de caractère pour redirection sur la page index.xhtml
      * @throws NullParameterException 
      */
     public String addNewPerson() throws NullParameterException {
-        Person newPerson = new Person(firstname, lastname);
-        service.savePerson(newPerson);
+        service.savePerson(currentPerson);
         return "/index.xhtml?faces-redirect=true";
+    }
+    
+    /**
+     * modification sur une personne présente dans la liste de personnes
+     * en fonction des informations (nom, prénom) modifiées par l'utilisateur
+     * @return chaine de caractère pour redirection sur la page index.xhtml 
+     */
+    public String editPerson() {
+        
+        service.getPersonWithId(currentPerson.getId()).setFirstname(currentPerson.getFirstname());    
+        service.getPersonWithId(currentPerson.getId()).setLastname(currentPerson.getLastname());
+        return "/index.xhtml?faces-redirect=true";
+    }
+    
+    public void deleteMovie(Movie movie) throws NullParameterException, InvalidParameterException {
+        service.removeMovieFromPerson(currentPerson, movie);
+        //return "/person/person.xhtml?faces-redirect=true?id=" + currentPerson;
     }
     
 }
