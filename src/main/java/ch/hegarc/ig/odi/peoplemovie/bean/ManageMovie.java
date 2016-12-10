@@ -66,8 +66,8 @@ public class ManageMovie {
     }
     
     /**
-     * crée un nouvel objet de type Movie en
-     * reprenant un film existant par son ID
+     * crée un nouvel objet de type Movie en reprenant
+     *  un film existant par son ID s'il n'est pas null
      */
     public void initMovie() {
         if(idMovie == null) {
@@ -88,6 +88,11 @@ public class ManageMovie {
         return "/index.xhtml?faces-redirect=true";
     }
     
+    /**
+     * modification sur un film présent dans la liste de films en 
+     * fonction des informations (nom, producteur) modifiées par l'utilisateur
+     * @return chaine de caractère pour redirection sur la page index.xhtml
+     */
     public String editMovie() {
         
         return "/index.xhtml?faces-redirect=true";

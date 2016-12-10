@@ -78,8 +78,8 @@ public class ManagePerson {
     }
     
     /**
-     * ajoute une nouvelle personne en fonction des
-     * informations (nom, producteur) entrées par l'utilisateur
+     * ajoute une nouvelle personne en fonction des informations
+     * (nom, prénom) entrées par l'utilisateur
      * @return chaine de caractère pour redirection sur la page index.xhtml
      * @throws NullParameterException 
      */
@@ -88,10 +88,12 @@ public class ManagePerson {
         return "/index.xhtml?faces-redirect=true";
     }
     
+    /**
+     * modification sur une personne présente dans la liste de personnes
+     * en fonction des informations (nom, prénom) modifiées par l'utilisateur
+     * @return chaine de caractère pour redirection sur la page index.xhtml 
+     */
     public String editPerson() {
-        /*Person personEdited = service.getPersonWithId(idPerson);
-        personEdited.setFirstname(firstname);
-        personEdited.setLastname(lastname);*/
         
         service.getPersonWithId(currentPerson.getId()).setFirstname(currentPerson.getFirstname());    
         service.getPersonWithId(currentPerson.getId()).setLastname(currentPerson.getLastname());
