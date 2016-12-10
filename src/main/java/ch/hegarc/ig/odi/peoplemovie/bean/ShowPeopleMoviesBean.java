@@ -47,9 +47,12 @@ public class ShowPeopleMoviesBean {
         this.movies = movies;
     }
     
+    /**
+     * rempli people et movies avec les personnes et films déjà existants
+     */
     public void initEntities() {
         this.people = service.getPeopleList();
         this.movies = service.getMoviesList();
     }
-    
+        
 }

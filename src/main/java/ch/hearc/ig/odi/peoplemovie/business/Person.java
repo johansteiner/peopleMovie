@@ -25,6 +25,12 @@ public class Person {
         this.movies = new ArrayList<Movie>();
     }
 
+    public Person(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.movies = new ArrayList<Movie>();
+    }
+
     public Person(Long id, String firstname, String lastname) {
         this.id = id;
         this.firstname = firstname;
@@ -63,7 +69,13 @@ public class Person {
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
-    
+       
+    /**
+     * 
+     * @param movie objet de type Movie qui sera ajoutée à la liste movies
+     * @throws UniqueException
+     * @throws NullParameterException 
+     */
     public void addMovie(Movie movie) throws UniqueException, NullParameterException {
         
         // Si le film est nul ==> exception
