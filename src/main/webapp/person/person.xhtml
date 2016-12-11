@@ -38,7 +38,7 @@
                 
                 <h1>#{msg['person.movielist.title']}</h1>
                 <br/>
-                <h:form>
+                
                 <h:dataTable value="#{managePerson.currentPerson.movies}" var="moviePers">
                     <h:column>
                         <f:facet name="header">#{msg['index.movieslist.id']}</f:facet>
@@ -57,11 +57,20 @@
                         #{moviePers.producer}
                     </h:column> 
                     <h:column>
+                        <h:form>
                             <h:commandButton value="#{msg['button.delete']}" action="#{managePerson.deleteMovie(moviePers)}" />
+                        </h:form>
                     </h:column> 
                 </h:dataTable>
-                </h:form>
                 <br/>
+                <h:form>
+                    #{msg['person.addMovie']}
+                    <h:selectOneMenu id="lovMovie" value="#{managePerson.movieAdd}">
+                        <f:converter binding="#{moviesLOVConverter}"/>
+                        <f:selectItems value="#{managePerson.movieToAdd}" var="movie" itemLabel="#{movie.name}"/>
+                    </h:selectOneMenu>
+                    <h:commandButton value="#{msg['button.add']}" action="#{managePerson.addMovie()}"/>
+                </h:form>
                 
                 <h:button value="#{msg['button.return.index']}" outcome="/index.xhtml"/>
                 
