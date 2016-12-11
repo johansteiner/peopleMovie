@@ -9,8 +9,10 @@ import ch.hearc.ig.odi.peoplemovie.business.Movie;
 import ch.hearc.ig.odi.peoplemovie.business.Person;
 import ch.hearc.ig.odi.peoplemovie.exception.InvalidParameterException;
 import ch.hearc.ig.odi.peoplemovie.exception.NullParameterException;
+import ch.hearc.ig.odi.peoplemovie.exception.UniqueException;
 import ch.hearc.ig.odi.peoplemovie.service.Services;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -26,9 +28,8 @@ public class ManagePerson implements Serializable{
     @Inject Services service;
 
     private Long idPerson;
-    private String firstname;
-    private String lastname;
     private Person currentPerson;
+    Movie movieAdd;
     
     public ManagePerson() {
         if(currentPerson==null) {
@@ -44,22 +45,6 @@ public class ManagePerson implements Serializable{
         this.idPerson = idPerson;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public Person getCurrentPerson() {
         return currentPerson;
     }
@@ -67,7 +52,15 @@ public class ManagePerson implements Serializable{
     public void setCurrentPerson(Person currentPerson) {
         this.currentPerson = currentPerson;
     }
-    
+
+    public Movie getMovieAdd() {
+        return movieAdd;
+    }
+
+    public void setMovieAdd(Movie movieAdd) {
+        this.movieAdd = movieAdd;
+    }
+        
     /**
      * crée un nouvel objet de type Person en reprenant
      * une personne existante par son ID s'il y en a
@@ -108,4 +101,25 @@ public class ManagePerson implements Serializable{
         //return "/person/person.xhtml?faces-redirect=true?id=" + currentPerson;
     }
     
+    
+    /**
+     * Retourne la liste des films pas encore ajoutés à une persone
+     * @return liste de films
+     */
+    public List<Movie> getMovieToAdd(){
+        List<Movie> moviesToReturn = service.getMoviesList();
+        
+        for(Movie movie : currentPerson.getMovies()){
+            moviesToReturn.remove(movie);
+        }
+        
+        return moviesToReturn;
+    }
+    
+    /**
+     * Ajoute un film à une personne
+     */
+    public void addMovie() throws NullParameterException, UniqueException {
+        service.addMovieToPerson(currentPerson, movieAdd);
+    }
 }
